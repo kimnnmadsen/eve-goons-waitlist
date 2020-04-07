@@ -13,12 +13,12 @@ module.exports = function (setup) {
 		}
 		
 		bans.checkIfBanned(req.user.characterID, function(ban) {
-			//if (ban.banType == "Squad") {
+			if (ban) {
 				log.warn("Logging out banned user: " + req.user.name);
 				req.logout();
 				res.status(418).render("statics/banned.html");
 				return;
-			//}
+			}
 			next();
 		})
 	}
