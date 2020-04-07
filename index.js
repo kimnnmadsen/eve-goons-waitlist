@@ -1,15 +1,21 @@
 
 // mandatory setup.js
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const nunjucks = require('nunjucks');
 if (!fs.existsSync(path.normalize(__dirname + "/setup.js"))) {
 	throw "You need to create a setup.js file. Refer to the readme."
 }
+const ssl = {
+	key: fs.readFileSync('cert/tdf.key.txt', 'utf8'),
+	cert: fs.readFileSync('cert/tdf.cert.txt', 'utf8')
+};
 
 const setup = require('./setup.js');
 const log = require('./logger.js')(module);
 const database = require('./dbHandler.js');
+
 
 //Apparently JS has a shit fit when it can't throw errors properly so uh, we need to make it throw errors properly
 process.on('uncaughtException', function(exception) {
@@ -58,7 +64,7 @@ database.connect(function () {
 				if (success) {
 					users.findOrCreateUser(users, refreshToken, characterDetails, function (user, err) {
 						if(req.isAuthenticated())
-						{	
+						{
 							//Link the alt to the users main account
 							users.linkPilots(req.user, characterDetails, function(result){
 								req.flash("content", {"class": result.type, "title":"Account Linked", "message": result.message});
@@ -72,7 +78,7 @@ database.connect(function () {
 								done(null, user);
 							}
 						}
-						
+
 					})
 				} else {
 					log.info(`Character ID request failed for token ${refreshToken}`);
@@ -106,7 +112,7 @@ database.connect(function () {
 	app.use(passport.initialize());
 	app.use(passport.session());
 	app.use(bodyParser.urlencoded({ extended: true }));
-			
+
 	/* Middleware Checks */
 	app.use('/includes', express.static('public/includes'));//Exempt
 	app.use(require('./middleware/userSession.js')(setup).refresh);
@@ -132,10 +138,12 @@ database.connect(function () {
 	longpoll.create("/poll/:id", (req, res, next) => {
 		req.id = req.params.id;
 		next();
-	});	
+	});
 
 	//Configure Express webserver
-	app.listen(setup.settings.port, function listening() {
+	var httpsServer = https.createServer(ssl, app);
+//	app.
+	httpsServer.listen(setup.settings.port, function listening() {
 		log.info('Express online and accepting connections');
 	});
 });
