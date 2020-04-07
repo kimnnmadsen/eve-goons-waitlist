@@ -27,8 +27,8 @@ module.exports = function (setup) {
    
     //Returns all active bans
     module.getBans = function (cb) {
-		db.findMany( { deletedAt: {}}).toArray(function (err, docs) {
-            if (err) log.error("fleet.getFCPageList: Error for db.findMany", { err });
+		db.find( { deletedAt: {}}).toArray(function (err, docs) {
+            if (err) log.error("fleet.getFCPageList: Error for db.find", { err });
             cb(docs);
         })
     }

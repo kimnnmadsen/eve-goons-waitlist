@@ -12,8 +12,8 @@ module.exports = function (setup) {
     * @return whitelist
     */
     module.get = function (cb) {
-        db.findMany( { deletedAt: {}}).toArray(function (err, docs) {
-            if (err) log.error("whitelist.get: Error for db.findMany", { err });
+        db.find( { deletedAt: {}}).toArray(function (err, docs) {
+            if (err) log.error("whitelist.get: Error for db.find", { err });
             cb(docs);
         })
     }

@@ -32,8 +32,8 @@ module.exports = function (setup) {
 	};
 
 	module.findAndReturnUser = function (checkID, cb) {
-		db.findMany({ 'characterID': checkID }).toArray(function (err, docs) {
-			if (err) log.error("findAndReturnUser: Error for db.findMany.toArray", { err, checkID });
+		db.find({ 'characterID': checkID }).toArray(function (err, docs) {
+			if (err) log.error("findAndReturnUser: Error for db.find.toArray", { err, checkID });
 			if (docs.length === 0) {
 				cb(false)
 			} else {
@@ -102,8 +102,8 @@ module.exports = function (setup) {
 
 	//Return a list of all users with a permission higher than 0.
 	module.getFCList = function(cb) {
-		db.findMany( { "role.numeric": {$gt: 0}}).toArray(function (err, docs) {
-			if (err) log.error("fleet.getFCPageList: Error for db.findMany", { err });
+		db.find( { "role.numeric": {$gt: 0}}).toArray(function (err, docs) {
+			if (err) log.error("fleet.getFCPageList: Error for db.find", { err });
 			cb(docs);
 		})
 	}
@@ -199,7 +199,7 @@ module.exports = function (setup) {
 		let knownPilots = [];
 		module.getMain(userID, function(mainObject){
 			knownPilots.push({"characterID": mainObject.characterID, "name": mainObject.name});
-				db.findMany(
+				db.find(
 					{
 						characterID: {
 							$in: mainObject.account.linkedCharIDs
