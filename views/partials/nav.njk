@@ -30,24 +30,13 @@
 			<p>{{ userProfile.role.title }}</p>
 		</div>
 	</div>
-	<span class="heading">Pilot</span>
 	<ul class="list-unstyled">
-		<li{{  " class=active" if sideBarSelected === 1 }}><a href="/"><i class="fas fa-hourglass-half"></i> Waitlist</a></li>
-		<li{{  " class=active" if sideBarSelected === 2 }}>
-		<a href="#myaccount" aria-expanded="false" data-toggle="collapse" class="collapsed"> <i class="fa fa-user"></i> My Account <i class="fas fa-sort-down float-right"></i></a>
+		<li><a href="/"> Waitlist</a></li>
 		<li><a href="/my-settings">My Settings</a></li>
-		</li>
-		<li{{  " class=active" if sideBarSelected === 3 }}>
-		<a href="#squadtools" aria-expanded="false" data-toggle="collapse" class="collapsed"><i class="fa fa-users"></i> Squad Stuff <i class="fas fa-sort-down float-right"></i></a>
-		<ul id="squadtools" class="collapse list-unstyled" >
-			<li><a href="https://goonfleet.com/index.php/topic/219113-incursion-squad-tutorial-directory-read-me/" target="blank">New Pilot Guide</a></li>
-			<li><a href="https://goonfleet.com/index.php/topic/219234-incursion-squad-fitting-directory/" target="blank">Squad Fittings</a></li>
-			<li class="strike"><a href="#">Squad Roles</a></li>
-			<li><a href="/squad-statistics">Squad Stats</a></li>
-		</ul>
-		</li>
-		<li> <a href="https://goonfleet.com/index.php/forum/273-incursions/" target="_blank"> <i class="fa fa-link"></i> Incursion Forums</a></li>
-		<li><a href="/admin/bans">Ban List</a></li>
+		<li> <a href="http://theditanianfleet.com/guide/newbro" target="_blank">Newbro Guide</a></li>
+		<li> <a href="http://theditanianfleet.com/guide/joiningfleet" target="_blank">Joining Fleet</a></li>
+		<li> <a href="http://dir-x.net/tdf/" target="_blank">Guides</a></li>
+		
 		{%- if userProfile.role.numeric > 0 %}   
 		<li><a href="/commander">Fleet Management</a></li>
 		<li{{  " class=active" if sideBarSelected === 6 }}>
@@ -59,6 +48,7 @@
 			<li><a href="#" data-toggle="modal" data-target="#waitlistBanner">Waitlist Banner</a></li>
 			<li><a href="/commander/tools/waitlist-logs">Waitlist Log</a></li>
 		</ul>
+		<li><a href="/admin/bans">Ban List</a></li>
 		{% if userProfile.role.numeric >= 4 %}
 		<li><a href="/admin/commanders">FC Management</a></li>
 		<li><a href="/admin/whitelist">White List</a></li>
