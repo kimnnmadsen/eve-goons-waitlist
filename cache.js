@@ -35,7 +35,7 @@ module.exports = function (setup) {
 			});
 		}
 
-		db.update(doc, data, { upsert: true }, function (err, result) {
+		db.updateOne(doc, data, { upsert: true }, function (err, result) {
 			if (err) {
 				log.error("addToDb: Error for db.update", { err, id: data.id });
 				// TODO: should this continue?
