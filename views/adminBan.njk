@@ -8,12 +8,9 @@
             <h2 class="h5 no-margin-bottom">Ban Management</h2>
           </div>
         </div>
+        {% if userProfile.role.numeric < 3 %}
         <div role="alert" class="alert alert-primary global-banner-inactive noselect">
-          <strong>Partial Functionality:</strong> Only SQUAD bans are implemented at this time! Any other bans will be ignored.
-        </div>
-        {% if userProfile.role.numeric < 5 %}
-        <div role="alert" class="alert alert-primary global-banner-inactive noselect">
-          <strong>Restricted Access:</strong> Only leadership can add and revoke bans.
+          <strong>Restricted Access:</strong> Only Fleet Commanders can add and revoke bans.
         </div>
         {% endif %}
         <section class="no-padding-top no-padding-bottom">
@@ -69,17 +66,6 @@
                             <label for="name">Pilot's Name:</label>
                             <input type="text" id="name" class="form-control" name="pilotName"/>
                           </div>
-
-                          <div class="form-group">
-                            <label for="type">Ban from:</label>
-                            <select class="form-control" name="type">
-                              <option value="Squad" selected required>Squad</option>
-                              <option value="ArseFleet">ArseFleet</option>
-                              <option value="Logistics">Logistics</option>
-                              <option value="Multiboxing">Multiboxing</option>
-                            </select>
-                          </div>
-
                           <div class="form-group">
                             <label for="notes">Notes:</label>
                             <textarea id="notes" class="form-control" name="notes" maxlength="120" rows="4" placeholder="Private notes (max 120)"></textarea>
