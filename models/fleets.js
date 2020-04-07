@@ -47,7 +47,7 @@ module.exports = function (setup) {
     * @return status
     */
     module.close = function(fleetID, cb){
-        db.remove({id: fleetID}, function (err) {
+        db.deleteOne({id: fleetID}, function (err) {
 			if (err){
                 log.error("fleet.delete:", { "fleet id: ": fleetID, err });
                 cb(400);
@@ -79,9 +79,9 @@ module.exports = function (setup) {
     * @return err || null
     */
     module.register = function(fleetObject, cb){
-        db.insert(fleetObject, function (err, result) {
+        db.insertOne(fleetObject, function (err, result) {
             if(err){
-                log.error("fleets.register: error for db.insert - ", {"Fleet ID": fleetObject.id, "Fleet Commander": fleetObject.fc.name, err})
+                log.error("fleets.register: error for db.insertOne - ", {"Fleet ID": fleetObject.id, "Fleet Commander": fleetObject.fc.name, err})
                 cb(err);
                 return;
             }

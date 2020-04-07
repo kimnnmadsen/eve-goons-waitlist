@@ -19,8 +19,8 @@ module.exports = function (setup) {
             "created_at": Date.now()
         }
         
-        db.insert(messagePackage, function (err, result) {
-            if (err) log.error("waitlistBanner.createNew: Error for db.insert", { err });
+        db.insertOne(messagePackage, function (err, result) {
+            if (err) log.error("waitlistBanner.createNew: Error for db.insertOne", { err });
             cb(200);
             
         })

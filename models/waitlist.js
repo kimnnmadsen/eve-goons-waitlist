@@ -60,8 +60,8 @@ module.exports = function (setup) {
                     "signup": Date.now(),
                 }
 
-                db.insert(waitlist, function (err) {
-                    if (err) log.error("waitlist.add: Error for db.insert", { err, name: pilot.name });
+                db.insertOne(waitlist, function (err) {
+                    if (err) log.error("waitlist.add: Error for db.insertOne", { err, name: pilot.name });
                     if (!err) cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
                 });
             })

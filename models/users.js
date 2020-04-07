@@ -93,8 +93,8 @@ module.exports = function (setup) {
 				registrationDate: new Date(),
 				userVersion: 2
 			}
-			db.insert(newUserTemplate, function (err, result) {
-				if (err) log.error("generateNewUser: Error for db.insert", { err, name: characterDetails.CharacterName });
+			db.insertOne(newUserTemplate, function (err, result) {
+				if (err) log.error("generateNewUser: Error for db.insertOne", { err, name: characterDetails.CharacterName });
 				cb(newUserTemplate);
 			})
 		})
