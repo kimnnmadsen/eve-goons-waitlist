@@ -60,7 +60,7 @@ module.exports = function (setup) {
             $and : [ {"deletedAt": {}},
                 { $or : [ { id : corporationID }, { id : allianceID } ] }]
         }).then(function(doc){
-            if(!!doc || user && user.role.numeric > 4){
+            if(!!doc || user && user.role.numeric >= setup.data.whitelistLevel){
                 cb(true);
             } else {
                 cb(false);
