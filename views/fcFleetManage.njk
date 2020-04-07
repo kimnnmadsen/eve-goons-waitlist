@@ -11,7 +11,7 @@
 {% endif %}
 {% if fleet.fc.characterID == undefined %}
 <div role="alert" class="alert alert-primary global-banner-inactive noselect">
-	<strong>ESI Fleet Disabled |</strong> You must set a new FC (Boss) before you can send invites.<br/>Use !esi in FC Jabber. If esi-fleets is yellow or red this issue may persist.
+	<strong>ESI Fleet Disabled |</strong> You must set a new FC (Boss) before you can send invites.
 </div>
 {% endif %}      
 <section class="no-padding-top no-padding-bottom">
@@ -28,7 +28,7 @@
 				<table class="table table-striped table-sm">
 					<tbody>
 						<tr>
-							<td>FC (Boss):</td>
+							<td>FC (Star):</td>
 							<td><a id="fcBoss" href="javascript:void(0);"></a></td>
 							<td><button class="btn btn-sm btn-block" onclick="setFC()">I'm the FC</button></td>
 						</tr>
@@ -47,8 +47,9 @@
 										<a class="dropdown-item" onclick="setFleetStatus('Forming')">Forming</a>
 										<a class="dropdown-item" onclick="setFleetStatus('Running')">Running</a>
 										<a class="dropdown-item" onclick="setFleetStatus('Docking Soon')">Docking Soon</a>
-										<a class="dropdown-item" onclick="setFleetStatus('Short Break')">Short Break</a>
-										<a class="dropdown-item" onclick="setFleetStatus('Not Listed')">Not Listed</a>       
+										<a class="dropdown-item" onclick="setFleetStatus('Short Break')">Break</a>
+										<a class="dropdown-item" onclick="setFleetStatus('Unlisted')">Unlisted</a>       
+										<a class="dropdown-item" onclick="setFleetStatus('zzzZZZzzz')">zzzZZZzzz</a>   
 									</div>
 								</div>
 							</td>
@@ -60,12 +61,10 @@
 								<div class="dropdown">
 									<button class="btn btn-default btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Change Type <i class="fas fa-sort-down float-right"></i></button>
 									<div class="dropdown-menu" role="menu">
-										<a class="dropdown-item" onclick="setFleetType('Scouts')">Scouts</a>
+										<a class="dropdown-item" onclick="setFleetType('Headquarters')">Headquarters</a>
+										<a class="dropdown-item" onclick="setFleetType('Elite')">HQ Elite</a>
 										<a class="dropdown-item" onclick="setFleetType('Vanguards')">Vanguards</a>
 										<a class="dropdown-item" onclick="setFleetType('Assaults')">Assaults</a>
-										<a class="dropdown-item" onclick="setFleetType('Headquarters')">Headquarters</a>
-										<a class="dropdown-item" onclick="setFleetType('Kundalini')">Kundalini</a>
-										<a class="dropdown-item" onclick="setFleetType('ARSEFleet')">ARSEFleet</a>        
 									</div>
 								</div>
 							</td>
@@ -81,6 +80,9 @@
 										<a class="dropdown-item" onclick="setCommsChannel('{{comms[1].url}}','{{comms[1].name | safe}}')">{{comms[1].name | safe}}</a>
 										<a class="dropdown-item" onclick="setCommsChannel('{{comms[2].url}}','{{comms[2].name | safe}}')">{{comms[2].name | safe}}</a>                             
 										<a class="dropdown-item" onclick="setCommsChannel('{{comms[3].url}}','{{comms[3].name | safe}}')">{{comms[3].name | safe}}</a>
+										<a class="dropdown-item" onclick="setCommsChannel('{{comms[4].url}}','{{comms[4].name | safe}}')">{{comms[4].name | safe}}</a>
+										<a class="dropdown-item" onclick="setCommsChannel('{{comms[5].url}}','{{comms[5].name | safe}}')">{{comms[5].name | safe}}</a>
+										<a class="dropdown-item" onclick="setCommsChannel('{{comms[6].url}}','{{comms[6].name | safe}}')">{{comms[6].name | safe}}</a>
 									</div>
 								</div>
 							</td>
@@ -102,8 +104,9 @@
 					<ul class="nav nav-pills nav-justified">
 						<li class="nav-item"><a role="tab" data-toggle="pill" id="fleet" href="javascript:void();" class="nav-link comp active">Fleet</a></li>
 						<li class="nav-item"><a role="tab" data-toggle="pill" id="logi" href="javascript:void();" class="nav-link comp">Logistics</a></li>
-						<li class="nav-item"><a role="tab" data-toggle="pill" id="caps" href="javascript:void();" class="nav-link comp">Capitals</a></li>
-						<li class="nav-item"><a role="tab" data-toggle="pill" id="supers" href="javascript:void();" class="nav-link comp">Supers</a></li>
+						<li class="nav-item"><a role="tab" data-toggle="pill" id="cqc" href="javascript:void();" class="nav-link comp">CQCs</a></li>
+						<li class="nav-item"><a role="tab" data-toggle="pill" id="shark" href="javascript:void();" class="nav-link comp">Sharks</a></li>
+						<li class="nav-item"><a role="tab" data-toggle="pill" id="sniper" href="javascript:void();" class="nav-link comp">Snipers</a></li>
 					</ul>
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="fleetAtAGlance">
@@ -123,15 +126,7 @@
 				<ul class="nav nav-pills nav-justified">
 					<li class="nav-item">
 						<a role="tab" data-toggle="pill" href="#waitlist" class="nav-link active">
-							<div id="fleetWaitlistCount" class="badge badge-dark strike">1</div> // 
-							<div id="fleetWaitlistCount" class="badge badge-dark strike">2</div>
 							Fleet Waitlist
-						</a>
-					</li>
-					<li class="nav-item">
-						<a role="tab" data-toggle="pill" href="#fleetlist" class="nav-link">
-							<div class="badge badge-dark">{{ fleet.members.length }}</div>
-							Fleet Comp
 						</a>
 					</li>
 				</ul>
@@ -142,12 +137,12 @@
 							<thead>
 								<tr>
 									<th class="tw30"></th>
+									<th class="tw30"></th>
+									<th class="tw30"></th>
+									<th class="tw30"></th>
+									<th class="tw30"></th>
 									<th class="tw20per">Name</th>
-									<th class="tw30"></th>
-									<th class="tw30"></th>
-									<th class="tw30"></th>
-									<th class="tw30"></th>
-									<th class="tw80">Fits</th>
+									<th class="tw80">Ships</th>
 									<th>System</th>
 									<th>Wait Time</th>
 								</tr>
@@ -167,11 +162,11 @@
 							<thead>
 								<tr>
 									<th class="tw30 text-right">Alt</th>
+									<th class="tw30"></th>
+									<th class="tw30"></th>
+									<th class="tw30"></th>
+									<th class="tw30"></th>
 									<th class="tw20per">Name // Main in Fleet</th>
-									<th class="tw30"></th>
-									<th class="tw30"></th>
-									<th class="tw30"></th>
-									<th class="tw30"></th>
 									<th class="tw80">Fits</th>
 									<th>System</th>
 									<th>Wait Time</th>
@@ -208,10 +203,8 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-				<p class="d-block">These buttons can break things, use them with care!</p>
 				<button class="btn btn-danger btn-sm btn-block" onclick="closeFleet({{fleet.id}})">Close the Fleet!</button>
 				<button class="btn btn-danger btn-sm btn-block" onclick="clearWaitlist()" type="button">Clear the Waitlist!</button>       
-				<button class="btn btn-danger btn-sm btn-block disabled" type="button" data-toggle="tooltip" title="Hahaha, no!">I need an Adult!</button>
 			</div>
 		</div>
 	</div>

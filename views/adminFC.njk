@@ -58,7 +58,6 @@
 								</select>
 								<button class="btn btn-success float-right">Update Rank</button>
 							</div>
-							
 						</form>
 						<strong>All Characters</strong>
 						<table class="table table-striped table-hover table-sm">
@@ -106,13 +105,6 @@
 						{{ roleDropdownContentHtml | safe  }}
 						</select>
 					</div>
-					{% if userProfile.role.numeric == 4 %}  
-					<span>Account Restrictions:</span>
-					<ul>
-						<li>You can only assign the Trainee permission.</li>
-						<li>You cannot revoke someone's access.</li>
-					</ul>
-					{% endif %}
 					<hr/>
 					<button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Add FC</button>
 					<button class="btn btn-light" type="button" data-dismiss="modal">Cancel</button>
