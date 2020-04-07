@@ -48,17 +48,17 @@
 						<ul class="list-unstyled">
 							<li><a href="javascript:void(0);" onclick="showInfo({{ manageUser.characterID }})">{{manageUser.name}}</a></li>
 							<li>{{manageUser.role.title }}</li>
-							<li class="strike">FCed for:</li>
 						</ul>
 						<form  method="post" action="/admin/commanders/update">
 							<input type="hidden" name="pilotName" value="{{manageUser.name}}">
 							<div class="form-group">
-								<label for="updatePermission">Update Permission</label>
+								<label for="updatePermission">New Rank</label>
 								<select id="updatePermission" class="form-control" name="permission">
 								{{ roleDropdownContentHtml | safe  }}
 								</select>
+								<button class="btn btn-success float-right">Update Rank</button>
 							</div>
-							<button class="btn btn-success float-right">Update Permissions</button>
+							
 						</form>
 						<strong>All Characters</strong>
 						<table class="table table-striped table-hover table-sm">
