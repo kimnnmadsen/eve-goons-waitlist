@@ -75,18 +75,18 @@ module.exports = function (setup) {
     */
     module.remove = function(type, characterID, cb){
         if(type == "all"){
-            db.remove({"waitlistMain.characterID": Number(characterID)}, function (err) {
+            db.deleteOne({"waitlistMain.characterID": Number(characterID)}, function (err) {
                 if (err) {
-                    if (err) log.error("waitlist.remove: Error for db.remove", { err, 'character ID': characterID });
+                    if (err) log.error("waitlist.remove: Error for db.deleteOne", { err, 'character ID': characterID });
                     cb({"class": "error", "title": "Woops!", "message":"We could not remove you from the waitlist!"});
                     return;
                 } 
                 cb({"class": "success", "title": "Success", "message":"We removed you from the waitlist!"});
             });
         } else { //Remove alt only
-            db.remove({characterID: Number(characterID)}, function (err) {
+            db.deleteOne({characterID: Number(characterID)}, function (err) {
                 if (err) {
-                    if (err) log.error("waitlist.remove: Error for db.remove", { err, 'character ID': characterID });
+                    if (err) log.error("waitlist.remove: Error for db.deleteOne", { err, 'character ID': characterID });
                     cb({"class": "error", "title": "Woops!", "message":"We could not remove you from the waitlist!"});
                     return;
                 }  
@@ -101,7 +101,7 @@ module.exports = function (setup) {
     * @return status
     */
     module.adminRemove = function(characterID, cb){
-        db.remove({characterID: Number(characterID)}, function (err){
+        db.deleteOne({characterID: Number(characterID)}, function (err){
             if(err){
                 log.error("waitlist.adminRemove: Error removing pilot from the waitlist", {"pilot ID": characterID, err});
                 cb(400);
