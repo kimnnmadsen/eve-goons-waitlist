@@ -12,8 +12,8 @@ module.exports = function (setup) {
         module.checkIfBanned(data.characterID, function(res) {
             if (!res)
             {
-                db.insert(data, function (err, result) {
-                    if (err) log.error("bans.register: Error for db.insert", { err, id: data.id });
+                db.insertOne(data, function (err, result) {
+                    if (err) log.error("bans.register: Error for db.insertOne", { err, id: data.id });
                     if (!err) log.debug("Ban issued", data);
                     cb(true);
                 });
@@ -27,8 +27,8 @@ module.exports = function (setup) {
    
     //Returns all active bans
     module.getBans = function (cb) {
-		db.find( { deletedAt: {}}).toArray(function (err, docs) {
-            if (err) log.error("fleet.getFCPageList: Error for db.find", { err });
+		db.findMany( { deletedAt: {}}).toArray(function (err, docs) {
+            if (err) log.error("fleet.getFCPageList: Error for db.findMany", { err });
             cb(docs);
         })
     }
@@ -44,8 +44,8 @@ module.exports = function (setup) {
 
     //Return a bool that  if the user is banned.
     module.checkIfBanned = function (charID, cb) {
-		db.find( { deletedAt: {}, characterID: charID}).toArray(function (err, docs) {
-            if (err) log.error("fleet.getFCPageList: Error for db.find", { err });
+		db.findOne( { deletedAt: {}, characterID: charID}).toArray(function (err, docs) {
+            if (err) log.error("fleet.getFCPageList: Error for db.findOne", { err });
             if (docs.length > 0) {
                 cb(docs[0])
             } else {

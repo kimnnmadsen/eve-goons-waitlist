@@ -19,7 +19,7 @@ exports.index = function(req,res){
 */
 exports.getMemberList = function(req, res){
     if(req.isAuthenticated()){
-        db.find({}).sort({registrationDate: (req.query.sort === "desc")? -1 : 1}).toArray(function (err, docs) {
+        db.findMany({}).sort({registrationDate: (req.query.sort === "desc")? -1 : 1}).toArray(function (err, docs) {
             if(!err){
                 var userArray = [];
                 for(var i = 0; i < docs.length; i++){
@@ -72,7 +72,7 @@ exports.getMontlySignups = function(req, res){
         
         var lastSix = new Date();
         lastSix.setMonth(lastSix.getMonth() - 5);
-        db.find({ 
+        db.findMany({ 
             'registrationDate': {
                 $gte: lastSix,
                 $lt: new Date()

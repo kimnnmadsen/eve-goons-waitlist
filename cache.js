@@ -114,8 +114,8 @@ module.exports = function (setup) {
 			}
 		}
 		ids = newids;
-		db.find({ 'id': { $in: ids } }).toArray(function (err, docs) {
-			if (err) log.error("massQuery: Error for db.find", { err, ids });
+		db.findMany({ 'id': { $in: ids } }).toArray(function (err, docs) {
+			if (err) log.error("massQuery: Error for db.findMany", { err, ids });
 			var fullquery = [];
 			for (var i = 0; i < docs.length; i++) {
 				fullquery.push(docs[i].id);

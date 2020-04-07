@@ -30,7 +30,7 @@ module.exports = function (setup) {
     * @return [ {ID, FC{}, BackFC{}, Status, Type, Comms{}, System{} }]
     */
     module.getFleetList = function(fleets){
-        db.find({}).toArray(function(err, docs){
+        db.findMany({}).toArray(function(err, docs){
             if(err) {
                 log.error("fleet.getFleetList: error getting the list of fleets", err);
                 fleets(null);
@@ -202,8 +202,8 @@ module.revokeFC = function(id, cb){
 }
 
 module.checkForDuplicates = function () {
-    db.find({}).toArray(function (err, docs) {
-        if (err) log.error("fleet.checkForDuplicates: Error for db.find", { err });
+    db.findMany({}).toArray(function (err, docs) {
+        if (err) log.error("fleet.checkForDuplicates: Error for db.findMany", { err });
         var members = [];
         //Concat didn't work here for some reason? Weird for loop madness instead
         for (var i = 0; i < docs.length; i++) {
@@ -233,7 +233,7 @@ module.timers = function () {
 
     function lookup() {
         var checkCache = [];
-        db.find().forEach(function (doc) {
+        db.findMany().forEach(function (doc) {
             /*
             * Check to see if we have an FC object.
             * If there is no FC the waitlist is in manual mode.

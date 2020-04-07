@@ -6,6 +6,7 @@ const MONGODB_URL = setup.data.mongoDbURL || process.env.MONGODB_URL || 'mongodb
 
 const absorbInitialConnectError = function absorbInitialConnectError(cb, database) {
 	mongo.connect(MONGODB_URL, function (err, client) 	{
+		
 		useUnifiedTopology: true
 		useNewUrlParser: true
 		if(err) {

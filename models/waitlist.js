@@ -8,8 +8,8 @@ module.exports = function (setup) {
     var module = {};
     
     module.get = function (cb) {
-		db.find({}).sort({ "signupTime": 1 }).toArray(function (err, docs) {
-			if (err) log.error("get: Error for db.find", { err });
+		db.findMany({}).sort({ "signupTime": 1 }).toArray(function (err, docs) {
+			if (err) log.error("get: Error for db.findMany", { err });
             
             for(let i = 0; i < docs.length; i++){
                 var signuptime = Math.floor((Date.now() - docs[i].signup)/1000/60);
@@ -134,7 +134,7 @@ module.exports = function (setup) {
     * @return { position, waitlistSize}
     */
     module.getQueue = function(characterID, cb){
-       db.find().sort({ signup: 1 }).toArray(function(err, docs){
+       db.findMany().sort({ signup: 1 }).toArray(function(err, docs){
             if(err){
                 log.error("waitlist.getQueue: ", err)
                 cb(null);
@@ -190,7 +190,7 @@ module.exports = function (setup) {
 		setTimeout(lookup, 10*1000)
 
 		function lookup() {
-				db.find().forEach(function (doc) {
+				db.findMany().forEach(function (doc) {
 					//Is user online?
 					//Update Location
 					user.getLocation(doc, function(location) {

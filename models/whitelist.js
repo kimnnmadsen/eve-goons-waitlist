@@ -13,7 +13,7 @@ module.exports = function (setup) {
     */
     module.get = function (cb) {
         db.findMany( { deletedAt: {}}).toArray(function (err, docs) {
-            if (err) log.error("whitelist.get: Error for db.find", { err });
+            if (err) log.error("whitelist.get: Error for db.findMany", { err });
             cb(docs);
         })
     }

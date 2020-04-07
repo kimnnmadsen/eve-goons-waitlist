@@ -32,8 +32,8 @@ module.exports = function (setup) {
     * @return: cb(banner || null)
     */
     module.getLast = function(cb){
-        db.find({}).sort({created_at: -1}).toArray(function (err, docs) {
-			if (err) log.error("waitlistBanner.getLast: Error for db.find", { err });
+        db.findMany({}).sort({created_at: -1}).toArray(function (err, docs) {
+			if (err) log.error("waitlistBanner.getLast: Error for db.findMany", { err });
             if(docs.length > 0 && docs[0].deleted == true){
                 cb(null)
             } else {

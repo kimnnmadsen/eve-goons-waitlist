@@ -9,8 +9,8 @@ var wlog = exports.wlog = {};
 * @limit 7 days
 */
 wlog.getWeek = function(cb){
-    db.find({"time":{$gte: new Date((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)))}}).sort({ "time": -1 }).toArray(function (err, docs) {
-        if (err) log.error("get: Error for db.find", { err });
+    db.findMany({"time":{$gte: new Date((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)))}}).sort({ "time": -1 }).toArray(function (err, docs) {
+        if (err) log.error("get: Error for db.findMany", { err });
         cb(docs);
     })
 }
