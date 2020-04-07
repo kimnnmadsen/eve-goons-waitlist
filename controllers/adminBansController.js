@@ -38,7 +38,6 @@ exports.createBan = function(req, res) {
             var banObject = {
                 characterID: results[0],
                 pilotName: req.body.pilotName,
-                banType: req.body.type,
                 notes: req.body.notes,
                 banAdmin: req.user,
                 createdAt: Date.now(),
