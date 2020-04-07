@@ -44,8 +44,8 @@ module.exports = function (setup) {
 
     //Return a bool that  if the user is banned.
     module.checkIfBanned = function (charID, cb) {
-		db.findOne( { deletedAt: {}, characterID: charID}).toArray(function (err, docs) {
-            if (err) log.error("fleet.getFCPageList: Error for db.findOne", { err });
+		db.find( { deletedAt: {}, characterID: charID}).toArray(function (err, docs) {
+            if (err) log.error("fleet.getFCPageList: Error for db.find", { err });
             if (docs.length > 0) {
                 cb(docs[0])
             } else {
