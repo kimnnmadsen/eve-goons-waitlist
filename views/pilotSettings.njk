@@ -9,69 +9,71 @@
 	</div>
 	<section class="no-padding-top no-padding-bottom">
 		<div class="container-fluid">
-			<!-- Fleet List -->
-			<div class="col-md-4 col-sm-6 col-sm-12">
-				<div class="statistic-block block">
-					<div class="progress-details align-items-end justify-content-between">
-						<img class="d-block mx-auto mb-2" src="https://image.eveonline.com/Character/{{ userProfile.account.pilots[0].characterID }}_128.jpg" alt="{{ userProfile.account.pilots[0].name }}">
-						<h5 style="text-align:center">Hi {{ userProfile.account.pilots[0].name }}</h5>
-					<!-- Settings -->
-					<hr />
-					<div class="form-row align-items-center">
-						<div class="col-12">
-							<form id="updateFit"><span class="d-inline"</span>
-								<label for="fit">Fit</label>
-								<div class="input-group">
-									<textarea class="form-control" id="fit" placeholder="Ship Fitting" value="{{ userProfile.settings.fit }}"/></textarea>
-									<div class="input-group-append">
-										<button class="btn btn-success" type="submit" onclick="updateFit()" style="border-bottom-left-radius:0px;border-top-left-radius:0px;"><i class="fas fa-check-circle"></i></button>
+			<div class="row">
+				<!-- Fleet List -->
+				<div class="col-md-4 col-sm-6 col-sm-12">
+					<div class="statistic-block block">
+						<div class="progress-details align-items-end justify-content-between">
+							<img class="d-block mx-auto mb-2" src="https://image.eveonline.com/Character/{{ userProfile.account.pilots[0].characterID }}_128.jpg" alt="{{ userProfile.account.pilots[0].name }}">
+							<h5 style="text-align:center">Hi {{ userProfile.account.pilots[0].name }}</h5>
+						<!-- Settings -->
+						<hr />
+						<div class="form-row align-items-center">
+							<div class="col-12">
+								<form id="updateFit"><span class="d-inline"</span>
+									<label for="fit">Fit</label>
+									<div class="input-group">
+										<textarea class="form-control" id="fit" placeholder="Ship Fitting" value="{{ userProfile.settings.fit }}"/></textarea>
+										<div class="input-group-append">
+											<button class="btn btn-success" type="submit" onclick="updateFit()" style="border-bottom-left-radius:0px;border-top-left-radius:0px;"><i class="fas fa-check-circle"></i></button>
+										</div>
 									</div>
-								</div>
-								<p id="fitStatus" class="form-text  font-italic">Please add your fit.</p>
-							</form>
+									<p id="fitStatus" class="form-text  font-italic">Please add your fit.</p>
+								</form>
+							</div>
 						</div>
+						<!-- Alts -->
+						<hr />
+						<button class="btn btn-success btn-sm d-block mb-3 mx-auto" data-toggle="modal" data-target="#addAlt"><i class="fas fa-user-plus"></i> Add an Alt</button>
+						<table class="table table-sm">
+							<tbody>
+								{% for pilot in userProfile.account.pilots %}
+								<tr>
+									<td class="tr35"><img src="https://image.eveonline.com/Character/{{ pilot.characterID }}_32.jpg" alt="pilot avatar" height="28px"></td>
+									<td><a href="javascript:void();" onclick="showInfo({{ pilot.characterID }}">{{ pilot.name }}</a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						</div>	
 					</div>
-					<!-- Alts -->
-					<hr />
-					<button class="btn btn-success btn-sm d-block mb-3 mx-auto" data-toggle="modal" data-target="#addAlt"><i class="fas fa-user-plus"></i> Add an Alt</button>
-					<table class="table table-sm">
-						<tbody>
-							{% for pilot in userProfile.account.pilots %}
-							<tr>
-								<td class="tr35"><img src="https://image.eveonline.com/Character/{{ pilot.characterID }}_32.jpg" alt="pilot avatar" height="28px"></td>
-								<td><a href="javascript:void();" onclick="showInfo({{ pilot.characterID }}">{{ pilot.name }}</a></td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-					</div>	
 				</div>
-			</div>
-			<div class="col-lg-8 col-md-6 col-sm-12">
-				<div class="statistic-block block">
-					<div class="progress-details align-items-end justify-content-between">
-						<!-- New Comment -->
-						<div class="my-2 noselect">
-							<form method="post" action="/my-settings/fit">
-								<textarea id="fit" class="form-control" name="Ship Fot" maxlength="300" placeholder="Max of 300 characters" required></textarea>
-								<button class="btn btn-success mt-2 float-right" type="submit">Submit</button>
-							</form>
+				<!-- Fits -->
+				<div class="col-lg-8 col-md-6 col-sm-12">
+					<div class="statistic-block block">
+						<div class="progress-details align-items-end justify-content-between">
+							<!-- New Comment -->
+							<div class="my-2 noselect">
+								<form method="post" action="/my-settings/fit">
+									<textarea id="fit" class="form-control" name="Ship Fot" maxlength="300" placeholder="Max of 300 characters" required></textarea>
+									<button class="btn btn-success mt-2 float-right" type="submit">Submit</button>
+								</form>
+							</div>
+							<hr/>
+							<!-- Comments Section -->
+							{% for note in mainAccount.notes %}
+								{% include "./partials/pilotNote.njk" %}
+							{% endfor %}
+							{% for fits in mainAccount.fits %}
+								{% include "./partials/pilotFit.njk" %}
+							{% endfor %}
+							<!-- End Comments Section -->
 						</div>
-						<hr/>
-						<!-- Comments Section -->
-						{% for note in mainAccount.notes %}
-							{% include "./partials/pilotNote.njk" %}
-						{% endfor %}
-						{% for fits in mainAccount.fits %}
-							{% include "./partials/pilotFit.njk" %}
-						{% endfor %}
-						<!-- End Comments Section -->
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
 <!-- Link Alt Modal -->
 <div role="dialog" tabindex="-1" class="modal fade" id="addAlt">
