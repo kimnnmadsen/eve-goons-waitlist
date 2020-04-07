@@ -166,21 +166,6 @@ module.exports = function() {
 		})
 	}
 
-	/*
-	* Sets the fit for the user
-	* @params user{}
-	* @retunr status
-	*/
-	module.updateFit = function(characterID, fit, cb){
-		db.updateOne({characterID: characterID},{$set: {"fit": fit}}, function (err, result) {
-			if(!err){
-				cb(200);
-			} else {
-				log.error("user.updateFit - ", {user: user.name, err});
-				cb(400);
-			}
-		})
-	}
 
 	/*
 	* Sets the users waitlist main. Should auto clear by downtime
@@ -218,6 +203,22 @@ module.exports = function() {
 			return;
 		})
 	}
+
+	module.addfit = function(characterID, fit, cb){
+		let newFit = {
+			"fit": fit
+		}
+		db.updateOne({characterID: characterID}, {$push: {fits: newFit}}, function(err){
+			if(!err){
+				cb(200);
+				return;
+			}
+			log.error("user.addFit: ", {"User": user.name,"Fit": fit});
+			cb(400);
+			return;
+		})
+	}
+
 	return module;
 	
 	
