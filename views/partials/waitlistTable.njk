@@ -2,23 +2,7 @@
 	<td>
 		<img src="https://image.eveonline.com/Character/{{ user.characterID }}_64.jpg" style="height:75%" alt="avatar"> 
 	</td>
-	<td>
-		<span>
-			<a href="javascript:void(0);" onclick="showInfo({{ user.characterID }})">{{ user.name }}</a>
-			{% if user.disciplinary %}
-			<a href="/commander/{{ user.name | replace(' ','-') }}/profile"><i class="fas fa-comment-exclamation"></i></a>
-			{% endif %}
-		</span>
-		<span id="{{ user.characterID }}-status">
-			{% if user.waitlistMain.characterID == user.characterID %}
-			{{ "Newbee" if user.newbee }}
-			{% else %}
-			// <a href="javascript:void(0);" onclick="showInfo({{ user.waitlistMain.characterID }})">{{ user.waitlistMain.name }}</a>
-			{% endif %}
-		</span>
-		
-	</td>
-	<td>
+		<td>
 		<button class="btn btn-sm btn-success {{ "" if fleet.fc.characterID else "disabled" }}" title="Invite Pilot" onclick="invitePilot('{{ user.characterID }}','{{fleet.id}}');"><i class="fa fa-plus"></i></button>
 	</td>
 	<td>
@@ -35,6 +19,22 @@
 	</td>
 	<td>
 		<button class="btn btn-danger btn-sm" onclick="removePilot('{{ user.characterID }}')" title="Remove from Waitlist"><i class="fa fa-minus"></i></button>
+	</td>
+	<td>
+		<span>
+			<a href="javascript:void(0);" onclick="showInfo({{ user.characterID }})">{{ user.name }}</a>
+			{% if user.disciplinary %}
+			<a href="/commander/{{ user.name | replace(' ','-') }}/profile"><i class="fas fa-comment-exclamation"></i></a>
+			{% endif %}
+		</span>
+		<span id="{{ user.characterID }}-status">
+			{% if user.waitlistMain.characterID == user.characterID %}
+			{{ "Newbee" if user.newbee }}
+			{% else %}
+			// <a href="javascript:void(0);" onclick="showInfo({{ user.waitlistMain.characterID }})">{{ user.waitlistMain.name }}</a>
+			{% endif %}
+		</span>
+		
 	</td>
 	<td>
 		<a href="#">
