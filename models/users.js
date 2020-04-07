@@ -14,7 +14,8 @@ module.exports = function (setup) {
 		//Update the users refresh token
 		if(refreshToken){
 			db.updateOne({characterID: characterDetails.CharacterID}, {$set: {refreshToken: refreshToken}}, function(err, result){
-				console.info("users.findOrCreateUser: Updating refreshToken for " + characterDetails.CharacterName);
+				log.info("users.findOrCreateUser: Updating refreshToken for " + characterDetails.CharacterName);
+
 			})
 		}//Check if the user exists
 		module.findAndReturnUser(characterDetails.CharacterID, function (userProfile) {
