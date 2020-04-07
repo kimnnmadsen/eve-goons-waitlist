@@ -31,3 +31,14 @@ exports.jabber = function(req, res){
         res.status(cb).send();
     })
 }
+
+exports.fit = function(req, res){
+    if(!users.isRoleNumeric(req.user, 0)){
+        res.status(401).redirect("/");
+        return;
+    }
+
+    user.updateFit((req.user.account.main)? req.user.characterID : req.user.account.mainID, req.body.fit, function (cb){
+        res.status(cb).send();   
+    })
+}

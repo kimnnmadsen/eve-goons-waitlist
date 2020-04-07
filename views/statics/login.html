@@ -62,7 +62,7 @@
               <div class="form d-flex align-items-center" style="color:white">
                 <div class="content text-center">
                   <div class="logo">
-                    <img class="no-select" src="./includes/img/gsf-bee.png" alt="GSF Smoking Bee">
+                    <img class="no-select" src="./includes/img/logo.png">
                     <h3>TDF Incursion Waitlist</h3>
                   </div>
                   <p>Please login via Oauth below.</p>
@@ -87,27 +87,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title"><strong class="text-primary">Goon</strong><strong>Incursions</strong></h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                        <h4 class="modal-title"><strong class="text-primary">TDF</strong> <strong>Waitlist</strong></h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                     <div class="modal-body">
                         <div role="tablist" id="accordion-scopes" style="display:block;left:auto;right:auto;width:95%">
-                            <div class="card">
-                                <div role="tab" class="card-header">
-                                    <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-scopes .item-1" href="#accordion-scopes .item-1">Assets</a></h5>
-                                </div>
-                                <div role="tabpanel" data-parent="#accordion-scopes" class="collapse item-1">
-                                    <div class="card-body">
-                                        <p class="card-text">Let&#39;s us see your ship fit.</p>
-                                        <small>
-                                        <ul class="list-unstyled">
-                                            <li>Access: Read</li>
-                                            <li>Scope: esi-assets.read_assets</li>
-                                            <li>Route: GET /characters/{character_id}/assets/</li>
-                                            <li>Notes: Planned, not currently used.</li>
-                                        </ul>
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card">
                                 <div role="tab" class="card-header">
                                     <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-scopes .item-2" href="#accordion-scopes .item-2">Fleets</a></h5>
@@ -123,24 +105,6 @@
                                             <li>Notes: Only used for FCs.</li>
                                           </ul>
                                         </small>                                
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div role="tab" class="card-header">
-                                    <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-scopes .item-3" href="#accordion-scopes .item-3">Fatigue</a></h5>
-                                </div>
-                                <div role="tabpanel" data-parent="#accordion-scopes" class="collapse item-3">
-                                    <div class="card-body">
-                                        <p class="card-text">Let&#39;s you and us know if your jump fatigue might be an issue.</p>
-                                        <small>
-                                          <ul class="list-unstyled">
-                                            <li>Access: Read</li>
-                                            <li>Scope: esi-characters.read_fatigue</li>
-                                            <li>Route: GET /characters/{character_id}/fatigue/</li>
-                                            <li>Notes: Planned, not currently used.</li>
-                                          </ul>
-                                        </small>                                          
                                     </div>
                                 </div>
                             </div>
@@ -177,24 +141,6 @@
                                             <li>Note: Planned, not currently used.</li>
                                           </ul>
                                         </small>                          
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div role="tab" class="card-header">
-                                    <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-scopes .item-6" href="#accordion-scopes .item-6">Killmails</a></h5>
-                                </div>
-                                <div role="tabpanel" data-parent="#accordion-scopes" class="collapse item-6">
-                                    <div class="card-body">
-                                        <p class="card-text">Ha you died. - We use this for SRP</p>
-                                        <small>
-                                          <ul class="list-unstyled">
-                                            <li>Access: Read</li>
-                                            <li>Scope: esi-killmails.read_killmails</li>
-                                            <li>Route: GET /characters/{character_id}/killmails/recent/</li>
-                                            <li>Note: Planned, not currently used. <strike>Good job Makeshift will have to do paperwork!</strike></li>
-                                          </ul>
-                                        </small>                                        
                                     </div>
                                 </div>
                             </div>
@@ -298,24 +244,6 @@
                                             <li>Route: POST /ui/autopilot/Waypoint/</li>
                                           </ul>
                                         </small>                                         
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div role="tab" class="card-header">
-                                    <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-scopes .item-13" href="#accordion-scopes .item-13">Wallet</a></h5>
-                                </div>
-                                <div role="tabpanel" data-parent="#accordion-scopes" class="collapse item-13">
-                                    <div class="card-body">
-                                        <p class="card-text">Gives us pilot stats and makes sure you are getting the right payouts.</p>
-                                        <small>
-                                          <ul class="list-unstyled">
-                                            <li>Access: Read</li>
-                                            <li>Scope: esi-wallet.read_character_wallet</li>
-                                            <li>Route: GET /characters/{character_id}/wallet/</li>
-                                            <li>Note: Planned, not currently used. <strike>This cannot turn your autopilot on, don&#39;t worry!</strike></li>
-                                          </ul>
-                                        </small>                                          
                                     </div>
                                 </div>
                             </div>

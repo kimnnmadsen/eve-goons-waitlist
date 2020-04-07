@@ -27,9 +27,6 @@
 			<div class="dropdown-menu" role="menu">
 				<a class="dropdown-item" href="/commander/{{ user.name | replace(' ','-') }}/profile">View Pilot Profile</a>
 				<a class="dropdown-item" href="/commander/{{ user.name | replace(' ','-') }}/skills">View Pilot Skills</a>
-				{% if user.contact.xmpp %}
-				<a class="dropdown-item" href="xmpp:{{ user.contact.xmpp }}@goonfleet.com">Jabber PM</a>
-				{% endif %}
 			</div>
 		</div>
 	</td>
@@ -41,7 +38,8 @@
 	</td>
 	<td>
 		<a href="#">
-			<!--<img src="https://image.eveonline.com/Render/17740_32.png" title="Machariel" alt="Machariel">-->{{ user.fits }}
+			<!--<img src="https://image.eveonline.com/Render/17740_32.png" title="Vindicator" alt="Vindicator">-->
+			<a href="/commander/{{ user.name | replace(' ','-') }}/profile">{{ user.fits }}</a>
 		</a>
 	</td>
 	<td><a href="javascript:void(0);" onclick="setWaypoint({{ user.location.systemID }})">{{ user.location.name }}</a></td>

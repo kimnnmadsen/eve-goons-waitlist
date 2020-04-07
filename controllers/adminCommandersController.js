@@ -5,7 +5,7 @@ const log = require('../logger.js')(module);
 
 //Render FC Management Page
 exports.index = function(req, res) {
-    if (users.isRoleNumeric(req.user, 4)){
+    if (users.isRoleNumeric(req.user, 5)){
         var manageUser = null;
         if (typeof req.query.user != "undefined") {
             users.findAndReturnUser(Number(req.query.user), function(profile) {
@@ -50,21 +50,21 @@ exports.index = function(req, res) {
             });
         }
     } else {
-        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"Only our Senior FC team has access to that page! Think this is an error? Contact a member of leadership."});
+        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"Only our Council has access to that page! Think this is an error? Contact a member of leadership."});
         res.status(403).redirect("/");
     }
 }
 
 //Updates a users permission level.
 exports.updateUser = function(req, res) {
-    if(!users.isRoleNumeric(req.user, 4))
+    if(!users.isRoleNumeric(req.user, 5))
     {
         req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"You are not allowed to adjust the permissions of this user. Think this is an error? Contact a member of leadership."});
         res.status(403).redirect('/admin/commanders');
         return;
     }
-    //Only allow senior FC to make people trainees
-    if(req.user.role.numeric == 4){
+    //Only allow Council to make people trainees
+    if(req.user.role.numeric == 5){
         req.body.permission = 1;
     }
 

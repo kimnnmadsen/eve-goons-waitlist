@@ -29,7 +29,7 @@ module.exports = function (setup) {
     * @params
     * @return
     */
-    module.add = function(waitlistMain, pilot, fits, contact, newbee, cb){
+    module.add = function(waitlistMain, pilot, ships, contact, newbee, cb){
         module.isUserPresent(pilot.characterID, function(result){
             if(result){
                 cb({"class": "error", "title": "Woops", "message": pilot.name + " is already on the waitlist."})
@@ -50,7 +50,7 @@ module.exports = function (setup) {
                     "waitlistMain": waitlistMain,
                     "name": pilot.name,
                     "characterID": pilot.characterID,
-                    "fits": fits,
+                    "Ships": ships,
                     "location": {
                         "systemID": null,
                         "name": null

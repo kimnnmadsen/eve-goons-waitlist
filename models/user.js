@@ -33,6 +33,8 @@ module.exports = function() {
 		}) 
 	}
 
+	
+
 	/*
 	* Checks to see if the user is online
 	* @params characterID
@@ -179,23 +181,6 @@ module.exports = function() {
 			}
 		})
 	}
-
-	/*
-	* Updates the users jabbername. 
-	* @function will @goonfleet.com
-	* @params characterID (int), jabberName
-	* @return status
-	*/
-	module.updateJabber = function(characterID, jabberName, cb){
-		let charPos = jabberName.indexOf("@")
-		jabberName = jabberName.substr(0, (charPos != -1)? charPos: jabberName.length);
-		
-		db.updateOne({characterID: characterID}, {$set: {"settings.xmpp": jabberName}},function(err){
-			if(err) cb(400);
-			if(!err) cb(200);
-		})
-	}
-
 
 	module.addNote = function(characterID, message, disciplinary, admin, cb){
 		let newNote = {

@@ -5,7 +5,7 @@ const users = require('../models/users.js')(setup);
 
 //Render whitelist Page
 exports.index = function(req, res) {
-    if (users.isRoleNumeric(req.user, 4)) {
+    if (users.isRoleNumeric(req.user, 5)) {
         whitelist.get(function(activeWhitelist){
             //Timestamps & sort
             for(let i = 0; i < activeWhitelist.length; i++) {
@@ -24,7 +24,7 @@ exports.index = function(req, res) {
             res.render('adminWhitelist.njk', {userProfile, sideBarSelected, activeWhitelist});
         })
     } else {
-        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"Only our Senior FC team has access to that page! Think this is an error? Contact a member of leadership."});
+        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"Only our Council has access to that page! Think this is an error? Contact a member of leadership."});
         res.status(403).redirect("/");
     }
 }
@@ -37,7 +37,7 @@ exports.index = function(req, res) {
 exports.store = function(req, res) {
     if (!users.isRoleNumeric(req.user, 5)) {
         req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"You are not allowed to edit the whitelist. Think this is an error? Contact a member of leadership."});
-        res.status(403).redirect('/admin/bans')
+        res.status(403).redirect('/admin/whitelist')
     
     }
     
@@ -118,8 +118,8 @@ function getEntity(name, type, entity){
 */
 exports.revoke = function(req, res) {
     if(!users.isRoleNumeric(req.user, 5)) {
-        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"You are not allowed to revoke bans. Think this is an error? Contact a member of leadership."});
-        res.status(403).redirect('/admin/bans');
+        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"You are not allowed to remove from the whitelist. Think this is an error? Contact a member of leadership."});
+        res.status(403).redirect('/admin/whitelist');
     } 
 
     whitelist.revoke(req.params.whitelistID, function(result){
@@ -128,7 +128,7 @@ exports.revoke = function(req, res) {
             res.status(200).redirect('/admin/whitelist');
         } else {
             req.flash("content", {"class":"error", "title":"Woops!", "message":"We cannot revoke their access."});
-            res.status(400).redirect('/admin/bans');
+            res.status(400).redirect('/admin/whitelist');
         }
     })
 }
