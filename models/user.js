@@ -204,7 +204,7 @@ module.exports = function() {
 		})
 	}
 
-	module.addfit = function(characterID, fit, cb){
+	module.addFit = function(characterID, fit, cb){
 		let newFit = {
 			"fit": fit
 		}
