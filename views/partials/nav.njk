@@ -35,10 +35,7 @@
 		<li{{  " class=active" if sideBarSelected === 1 }}><a href="/"><i class="fas fa-hourglass-half"></i> Waitlist</a></li>
 		<li{{  " class=active" if sideBarSelected === 2 }}>
 		<a href="#myaccount" aria-expanded="false" data-toggle="collapse" class="collapsed"> <i class="fa fa-user"></i> My Account <i class="fas fa-sort-down float-right"></i></a>
-		<ul id="myaccount" class="collapse list-unstyled ">
-			<li><a href="/my-settings">My Settings</a></li>
-			<li class="strike"><a href="/#">My SRP</a></li>
-		</ul>
+		<li><a href="/my-settings">My Settings</a></li>
 		</li>
 		<li{{  " class=active" if sideBarSelected === 3 }}>
 		<a href="#squadtools" aria-expanded="false" data-toggle="collapse" class="collapsed"><i class="fa fa-users"></i> Squad Stuff <i class="fas fa-sort-down float-right"></i></a>
@@ -50,17 +47,10 @@
 		</ul>
 		</li>
 		<li> <a href="https://goonfleet.com/index.php/forum/273-incursions/" target="_blank"> <i class="fa fa-link"></i> Incursion Forums</a></li>
+		<li><a href="/admin/bans">Ban List</a></li>
 	</ul>
 	{%- if userProfile.role.numeric > 0 %}   
-	<span class="heading">Fleet Commander</span>
-	<ul class="list-unstyled">
-		<li {{  "class=active" if sideBarSelected === 5 }}> <a href="/commander">
-		<span class="fa-layers fa-fw">
-		<i class="fas fa-hourglass-half"></i>
-		<i class="fas fa-lock-alt" data-fa-transform="shrink-6 down-2 right-4" style="color:#D6D8D9"></i>
-		</span>
-		Fleet Management</a>
-		</li>
+		<li><a href="/commander">Fleet Management</a></li>
 		<li{{  " class=active" if sideBarSelected === 6 }}>
 		<a href="#fctools" aria-expanded="false" data-toggle="collapse" class="collapsed"><i class="fas fa-toolbox"></i> FC Tools <i class="fas fa-sort-down float-right"></i></a>
 		<ul id="fctools" class="collapse list-unstyled ">
@@ -71,13 +61,8 @@
 			<li><a href="/commander/tools/waitlist-logs">Waitlist Log</a></li>
 		</ul>
 		{% if userProfile.role.numeric >= 4 %}
-		<li{{  " class=active" if sideBarSelected === 7 }}>
-		<a href="#squadmanagement" aria-expanded="false" data-toggle="collapse" class="collapsed"><i class="fas fa-tachometer-alt"></i> Waitlist Admin <i class="fas fa-sort-down float-right"></i></a>
-		<ul id="squadmanagement" class="collapse list-unstyled ">
-			<li><a href="/admin/bans">Ban List</a></li>
-			<li><a href="/admin/commanders">FC Management</a></li>
-			<li><a href="/admin/whitelist">White List</a></li>
-		</ul>
+		<li><a href="/admin/commanders">FC Management</a></li>
+		<li><a href="/admin/whitelist">White List</a></li>
 		</li>
 		{% endif %}
 	</ul>
