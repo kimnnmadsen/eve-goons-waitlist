@@ -167,6 +167,22 @@ module.exports = function() {
 	}
 
 	/*
+	* Sets the fit for the user
+	* @params user{}
+	* @retunr status
+	*/
+	module.updateFit = function(characterID, fit, cb){
+		db.updateOne({characterID: characterID},{$set: {"fit": fit}}, function (err, result) {
+			if(!err){
+				cb(200);
+			} else {
+				log.error("user.updateFit - ", {user: user.name, err});
+				cb(400);
+			}
+		})
+	}
+
+	/*
 	* Sets the users waitlist main. Should auto clear by downtime
 	* @params characterID (int)
 	* @return null || err
@@ -202,5 +218,7 @@ module.exports = function() {
 			return;
 		})
 	}
-    return module;
+	return module;
+	
+	
 }
