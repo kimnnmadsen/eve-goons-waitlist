@@ -38,7 +38,7 @@ exports.fit = function(req, res){
         return;
     }
 
-    user.addFit((req.user.account.main)? req.user.characterID : req.user.account.mainID, req.body.fit, function (result){
+    user.addFit((req.user.account.main)? req.user.characterID : req.user.account.mainID, req.body.fit, function (cb){
         res.status(cb).send();   
     })
 }
