@@ -27,7 +27,7 @@ const fleetsController = require('./controllers/fleetController.js');
 
 	//Pilot Settings
 	router.get('/my-settings', pilot_settings_controller.index);
-	router.post('/my-settings/jabber', pilot_settings_controller.jabber);
+	router.post('/my-settings/fit', pilot_settings_controller.fit);
 
 	//Commander - Fleets
 	router.get('/commander', commander_controller.index);

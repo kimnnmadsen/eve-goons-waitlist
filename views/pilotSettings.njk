@@ -19,15 +19,15 @@
 					<hr />
 					<div class="form-row align-items-center">
 						<div class="col-12">
-							<form id="updateJabber"><span class="d-inline" data-toggle="tooltip" title="Your jabber name without the @goonfleet.com"><i class="fas fa-info-circle"></i></span>
-								<label for="xmppName">Jabber Name</label>
+							<form id="updateFit"><span class="d-inline"</span>
+								<label for="fit">Fit</label>
 								<div class="input-group">
-									<input type="text" class="form-control" id="xmppName" placeholder="auth_username" value="{{ userProfile.settings.xmpp }}"/>
+									<input type="text" class="form-control" id="fit" placeholder="Ship Fitting" value="{{ userProfile.settings.fit }}"/>
 									<div class="input-group-append">
-										<button class="btn btn-success" type="submit" onclick="updateJabber()" style="border-bottom-left-radius:0px;border-top-left-radius:0px;"><i class="fas fa-check-circle"></i></button>
+										<button class="btn btn-success" type="submit" onclick="updateFit()" style="border-bottom-left-radius:0px;border-top-left-radius:0px;"><i class="fas fa-check-circle"></i></button>
 									</div>
 								</div>
-								<p id="jabberStatus" class="form-text  font-italic">Optional, but awesome.</p>
+								<p id="fitStatus" class="form-text  font-italic">Please add your fit.</p>
 							</form>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 				</ul>
 				<hr/>
 				<strong class="text-primary"><i class="fas fa-exclamation-triangle"></i></strong><strong> WARNING</strong>
-				<p>A pilot can only be linked to one account and this action cannot be undone. If you need your alt unlinked contact leadership.</p>
+				<p>A pilot can only be linked to one account and this action cannot be undone. If you need your alt unlinked contact the Council.</p>
 				<form class="text-center" action="/auth/provider" method="get">
 					<button class="btn-link" type="submit" ><img src="includes/img/EVE_SSO_Login_Buttons_Large_Black.png"></button>
 				</form> 
@@ -80,20 +80,20 @@
 	$("#updateJabber").submit(function(e){
 		e.preventDefault();
 	});
-	function updateJabber(){
-		var dataString = 'authName='+ $("#xmppName").val();
+	function updateFit(){
+		var dataString = 'fit='+ $("#fit").val();
 		$.ajax({
 			type: "POST",
-			url: "/my-settings/jabber",
+			url: "/my-settings/fit",
 			data: dataString,
 			statusCode: {
 				200: function(data) {
-					$("#jabberStatus").empty().append('<i class="fas fa-check"></i> Thanks!').css({ 'color': '#2b8a39', 'font-size': '90%' });
+					$("#fitStatus").empty().append('<i class="fas fa-check"></i> Thanks!').css({ 'color': '#2b8a39', 'font-size': '90%' });
 
 				}
 			}
 		}).fail(function(err){
-			$("#jabberStatus").empty().append('<i class="fas fa-times"></i> Something went wrong!').css({ 'color': '#E7002E', 'font-size': '90%' });
+			$("#fitStatus").empty().append('<i class="fas fa-times"></i> Something went wrong!').css({ 'color': '#E7002E', 'font-size': '90%' });
 			console.log(err)
 		});
 	}
