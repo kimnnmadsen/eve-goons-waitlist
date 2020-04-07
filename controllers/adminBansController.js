@@ -6,7 +6,7 @@ const log = require('../logger.js')(module);
 
 //Render Ban Page
 exports.index = function(req, res) {
-    if (users.isRoleNumeric(req.user, 4)) {
+    if (users.isRoleNumeric(req.user, 1)) {
         bans.getBans(function(activeBans) {
             
             for ( var i = 0; i < activeBans.length; i++) {
@@ -26,14 +26,14 @@ exports.index = function(req, res) {
             res.render('adminBan.njk', {userProfile, sideBarSelected, banList});
         })
     } else {
-        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"Only our Senior FC team has access to that page! Think this is an error? Contact a member of leadership."});
+        req.flash("content", {"class":"error", "title":"Not Authorised!", "message":"Only our Fleet Commander team has access to that page! Think this is an error? Contact a member of leadership."});
         res.status(403).redirect("/");
     }
 }
 
 //Add a Ban
 exports.createBan = function(req, res) {
-    if (users.isRoleNumeric(req.user, 5)) {
+    if (users.isRoleNumeric(req.user, 3)) {
         esi.characters.search.strict(req.body.pilotName).then(function (results) {
             var banObject = {
                 characterID: results[0],
