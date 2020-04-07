@@ -213,7 +213,7 @@ module.exports = function() {
 				cb(200);
 				return;
 			}
-			log.error("user.addFit: ", {"User": user.name,"Fit": fit});
+			log.error("user.addFit: ", {"Character ID": characterID,"Fit": fit});
 			cb(400);
 			return;
 		})

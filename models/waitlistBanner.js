@@ -48,7 +48,7 @@ module.exports = function (setup) {
     */
     module.hideLast = function(cb){
         db.updateMany({}, { $set: { deleted: true} }, function (err, result) {
-            if (err) log.error("waitlistBanner.hideLast: Error for db.update", { err });
+            if (err) log.error("waitlistBanner.hideLast: Error for db.updateMany", { err });
         })
         
         cb(200);
