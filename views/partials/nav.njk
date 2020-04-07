@@ -48,11 +48,10 @@
 		</li>
 		<li> <a href="https://goonfleet.com/index.php/forum/273-incursions/" target="_blank"> <i class="fa fa-link"></i> Incursion Forums</a></li>
 		<li><a href="/admin/bans">Ban List</a></li>
-	</ul>
-	{%- if userProfile.role.numeric > 0 %}   
+		{%- if userProfile.role.numeric > 0 %}   
 		<li><a href="/commander">Fleet Management</a></li>
 		<li{{  " class=active" if sideBarSelected === 6 }}>
-		<a href="#fctools" aria-expanded="false" data-toggle="collapse" class="collapsed"><i class="fas fa-toolbox"></i> FC Tools <i class="fas fa-sort-down float-right"></i></a>
+		<a href="#fctools" aria-expanded="false" data-toggle="collapse" class="collapsed">FC Tools <i class="fas fa-sort-down float-right"></i></a>
 		<ul id="fctools" class="collapse list-unstyled ">
 			<li><a href="/commander/tools/fits-scan">Fit Scan Tool</a></li>
 			<li><a href="#" onclick="openSearch()" accesskey="s">Pilot Search</a></li>
