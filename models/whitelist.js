@@ -12,7 +12,7 @@ module.exports = function (setup) {
     * @return whitelist
     */
     module.get = function (cb) {
-        db.find( { deletedAt: {}}).toArray(function (err, docs) {
+        db.findMany( { deletedAt: {}}).toArray(function (err, docs) {
             if (err) log.error("whitelist.get: Error for db.find", { err });
             cb(docs);
         })
@@ -26,8 +26,8 @@ module.exports = function (setup) {
     module.store = function (data, cb) {
         module.isAllowed(null, data.id, data.id, function(onWhitelist){
             if(!onWhitelist){
-                db.insert(data, function (err) {
-                    if (err) log.error("whitelist.store: Error for db.insert", { err, data });
+                db.insertOne(data, function (err) {
+                    if (err) log.error("whitelist.store: Error for db.insertOne", { err, data });
                     cb(null);
                 });
             } else {

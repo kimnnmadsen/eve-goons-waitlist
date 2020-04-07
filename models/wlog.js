@@ -29,7 +29,7 @@ wlog.joinWl = function(user){
         "class": "info",
         "time": new Date()
     }
-    db.insert(logObject);
+    db.insertOne(logObject);
 }
 
 /*
@@ -47,7 +47,7 @@ wlog.selfRemove = function(userID){
             "class": "info",
             "time": new Date()
         }
-        db.insert(logObject);
+        db.insertOne(logObject);
     })
 }
 
@@ -71,7 +71,7 @@ wlog.systemRemoved = function(userID){
             "class": "danger",
             "time": new Date()
         }
-        db.insert(logObject);
+        db.insertOne(logObject);
     })
 }
 
@@ -96,7 +96,7 @@ wlog.removed = function(userID, adminID){
                 "class": "danger",
                 "time": new Date()
             }
-            db.insert(logObject);        
+            db.insertOne(logObject);        
         })
     })
 }
@@ -119,7 +119,7 @@ wlog.clean = function(){
         "class": "danger",
         "time": new Date()
     }
-    db.insert(logObject);    
+    db.insertOne(logObject);    
 }
 
 /*
@@ -143,7 +143,7 @@ wlog.invited = function(userID, adminID){
                 "class": "success",
                 "time": new Date()
             }
-            db.insert(logObject);        
+            db.insertOne(logObject);        
         })
     })
 }
@@ -169,7 +169,7 @@ wlog.alarm = function(userID, adminID){
                 "class": "warning",
                 "time": new Date()
             }
-            db.insert(logObject);
+            db.insertOne(logObject);
         })
     })
 }
