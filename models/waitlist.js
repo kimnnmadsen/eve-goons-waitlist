@@ -62,7 +62,8 @@ module.exports = function (setup) {
 
                 db.insert(waitlist, function (err) {
                     if (err) log.error("waitlist.add: Error for db.insert", { err, name: pilot.name });
-                    if (!err) cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
+                    if (!err) console.log("It's FIIIINE");
+                    //cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
                 });
             })
         })
