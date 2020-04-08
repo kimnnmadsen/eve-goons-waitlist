@@ -6,8 +6,8 @@ const MONGODB_URL = setup.data.mongoDbURL || process.env.MONGODB_URL || 'mongodb
 
 const absorbInitialConnectError = function absorbInitialConnectError(cb, database) {
 	mongo.connect(MONGODB_URL, function (err, client) {
-		"useUnifiedTopology" = true
-		"useNewUrlParser" = true
+		useUnifiedTopology: true
+		useNewUrlParser: true
 		if(err) {
 			log.error('Database connection failure', {err});
 			if(err.message && err.message.match(/failed to connect to server .* on first connect/)) {
