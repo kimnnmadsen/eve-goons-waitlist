@@ -145,7 +145,7 @@ database.connect(function () {
 	//var httpsServer = https.createServer(ssl, app);
 	//httpsServer.listen(setup.settings.http, function listening() {log.info('Express online and accepting connections');});
 	//HTTP
-	app.listen(setup.settings.http, function listening() {
+	app.listen(setup.settings.port, function listening() {
 		log.info('Express online and accepting connections');
 	});
 });
