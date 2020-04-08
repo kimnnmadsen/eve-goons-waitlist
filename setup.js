@@ -42,7 +42,8 @@ exports.fleet = {
 }
 
 exports.settings = {
-        port: 443
+        http: 80,
+        https: 443
 }
 
 //roleNumeric titles, use null to disable. Leave index0 as member

@@ -141,10 +141,11 @@ database.connect(function () {
 	});
 
 	//Configure Express webserver
+	//HTTPS
 	//var httpsServer = https.createServer(ssl, app);
-//	app.
-	//httpsServer.
-	listen(setup.settings.port, function listening() {
+	//httpsServer.listen(setup.settings.http, function listening() {log.info('Express online and accepting connections');});
+	//HTTP
+	app.listen(setup.settings.http, function listening() {
 		log.info('Express online and accepting connections');
 	});
 });
