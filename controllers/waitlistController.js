@@ -67,12 +67,7 @@ exports.signup = function(req, res){
             }
         }
 
-        var contact = {
-            "xmpp": (!!req.user.settingsreq) ? req.user.settings.xmpp : null,
-            "pingTarget": req.user.characterID
-        }
-        
-        waitlist.add(waitlistMain, pilot, req.body.ship, contact, req.user.newbee, function(result){
+            waitlist.add(waitlistMain, pilot, req.body.ship, req.user.newbee, function(result){
             wlog.joinWl(pilot);
             req.flash("content", {"class": result.class, "title": result.title, "message": result.message});
             res.redirect(`/`);
