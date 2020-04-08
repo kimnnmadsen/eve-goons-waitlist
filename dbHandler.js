@@ -1,20 +1,19 @@
 const setup = require('./setup.js');
-const mongo = require('mongodb').MongoClient;
+const mongoClient = require('mongodb').MongoClient;
 const log = require('./logger.js')(module);
 
 const MONGODB_URL = setup.data.mongoDbURL || process.env.MONGODB_URL || 'mongodb://localhost:27017';
 
+const dbClient = new mongoClient(MONGODB_URL, { useUnifiedTopology: true, useNewUrlParser: true });
 const absorbInitialConnectError = function absorbInitialConnectError(cb, database) {
-	mongo.connect(MONGODB_URL, function (err, client) {
-		useUnifiedTopology: true
-		useNewUrlParser: true
-		if(err) {
-			log.error('Database connection failure', {err});
-			if(err.message && err.message.match(/failed to connect to server .* on first connect/)) {
-			        setTimeout(absorbInitialConnectError.bind(null, cb, dbService), 2000);
+	dbClient.connect(function (err, mongoClient) {
+		if (err) {
+			log.error('Database connection failure', { err });
+			if (err.message && err.message.match(/failed to connect to server .* on first connect/)) {
+				setTimeout(absorbInitialConnectError.bind(null, cb, dbService), 2000);
 			}
 		} else {
-			if(database !== undefined) {
+			if (database !== undefined) {
 				database.db = client.db(setup.data.mongoDbName);
 			} else {
 				dbService.db = client.db(setup.data.mongoDbName);
@@ -22,10 +21,31 @@ const absorbInitialConnectError = function absorbInitialConnectError(cb, databas
 			log.info("Database connection successful.");
 			cb();
 		}
-	
 	});
 };
 
-const dbService = {connect: absorbInitialConnectError};
+	/*
+	const absorbInitialConnectError = function absorbInitialConnectError(cb, database) {);
+		mongo.connect(MONGODB_URL, function (err, client) {
+			if(err) {
+				log.error('Database connection failure', {err});
+				if(err.message && err.message.match(/failed to connect to server .* on first connect/)) {
+						setTimeout(absorbInitialConnectError.bind(null, cb, dbService), 2000);
+				}
+			} else {
+				if(database !== undefined) {
+					database.db = client.db(setup.data.mongoDbName);
+				} else {
+					dbService.db = client.db(setup.data.mongoDbName);
+				}
+				log.info("Database connection successful.");
+				cb();
+			}
+	
+		});
+	};
+	*/
+	const dbService = {connect: absorbInitialConnectError};
+	
 
-module.exports = dbService;
+	module.exports = dbService;
