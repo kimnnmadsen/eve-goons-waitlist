@@ -29,14 +29,14 @@ module.exports = function (setup) {
     * @params
     * @return
     */
-    module.add = function(waitlistMain, pilot, ships, cb){
+    module.add = function(waitlistMain, pilot, ship, cb){
         module.isUserPresent(pilot.characterID, function(result){
             if(result){
                 cb({"class": "error", "title": "Woops", "message": pilot.name + " is already on the waitlist."})
                 return;
             }
 
-            users.getMain(waitlistMain.characterID, function(userObject,cb2){
+            users.getMain(waitlistMain.characterID, function(userObject){
                 var disciplinary = false;
 
                 for(let i = 0; i < userObject.notes.length; i++){
@@ -50,7 +50,7 @@ module.exports = function (setup) {
                     "waitlistMain": waitlistMain,
                     "name": pilot.name,
                     "characterID": pilot.characterID,
-                    "Ships": ships,
+                    "ship": ship,
                     "location": {
                         "systemID": null,
                         "name": null
@@ -59,7 +59,7 @@ module.exports = function (setup) {
                     "signup": Date.now(),
                 }
 
-                db.insertOne(waitlist, function (err, cb3) {
+                db.insertOne(waitlist, function (err, cb) {
                     if (err) console.error("waitlist.add: Error for db.insertOne", { err, name: pilot.name });
                     if (!err) return cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
                 });
