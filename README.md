@@ -7,6 +7,7 @@ The ESI-enabled ajax-based waitlist used by the Incursions squad in Goonfleet of
 * Install a MongoDB instance
 * Create a `setup.js` file using the template below.
 
+![Node.js CI](https://github.com/kimnnmadsen/eve-goons-waitlist/workflows/Node.js%20CI/badge.svg)
 setup.js:
 ```
 exports.oauth = {
