@@ -36,7 +36,7 @@ module.exports = function (setup) {
                 return;
             }
 
-            users.getMain(waitlistMain.characterID, function(userObject){
+            users.getMain(waitlistMain.characterID, function(userObject,cb2){
                 var disciplinary = false;
 
                 for(let i = 0; i < userObject.notes.length; i++){
@@ -59,7 +59,7 @@ module.exports = function (setup) {
                     "signup": Date.now(),
                 }
 
-                db.insertOne(waitlist, function (err, cb) {
+                db.insertOne(waitlist, function (err, cb3) {
                     if (err) console.error("waitlist.add: Error for db.insertOne", { err, name: pilot.name });
                     if (!err) return cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
                 });
