@@ -17,7 +17,6 @@ module.exports = function (setup) {
 				res.render("statics/login.html");
 				next();
 			} else {
-				
 				users.getMain(userData.characterID, function(mainUserData){
 					users.getAlts(mainUserData.characterID, function(pilotArray){
 						userData.role = mainUserData.role;
@@ -32,7 +31,6 @@ module.exports = function (setup) {
 							if (err) log.error("updateUserSession: Error for session.save", { err, 'characterID': user.characterID });
 							next();
 						})
-						
 					})//End Session Change
 				})
 			}

@@ -1,4 +1,4 @@
-﻿const { createLogger, transports, format } = require('winston');
+const { createLogger, transports, format } = require('winston');
 const { combine, timestamp, printf } = format;
 const path = require('path');
 const fs = require('fs');
@@ -72,7 +72,7 @@ const getWinstonTransports = () => {
 
   winstonTransports.push(new transports.File({
     level: 'debug',
-    filename: `${getLogDirectory()}/eve-goons-waitlist.log`,
+    filename: `${getLogDirectory()}/waitlist.log`,
     format: combine(timestamp(), myFormat(false)),
     maxsize: 10000000,
     maxFiles: 10,
@@ -85,7 +85,7 @@ const getWinstonTransports = () => {
 const getWinstonExceptionTransports = () => {
   const winstonExceptionTranports = [];
   winstonExceptionTranports.push(new transports.File({
-    filename: `${getLogDirectory()}/eve-goons-waitlist-exceptions.log`,
+    filename: `${getLogDirectory()}/waitlist-exceptions.log`,
     level: 'silly',
     handleExceptions: true
   }));
