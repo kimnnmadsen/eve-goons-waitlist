@@ -59,7 +59,7 @@ module.exports = function (setup) {
                     "signup": Date.now(),
                 }
 
-                db.insertOne(waitlist, function (err) {
+                db.insertOne(waitlist, function (cb) {
                     if (err) console.error("waitlist.add: Error for db.insertOne", { err, name: pilot.name });
                     if (!err) return cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
                 });
