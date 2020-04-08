@@ -42,7 +42,7 @@ exports.fleet = {
 }
 
 exports.settings = {
-        http: 5000
+        port: 5000
 }
 
 //roleNumeric titles, use null to disable. Leave index0 as member
