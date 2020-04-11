@@ -11,7 +11,7 @@ exports.index = function(req, res) {
 
     } else {
         req.flash("content", {"class":"error", "title":"Not Authorised", "message":"You need to be logged in to access this page."});
-        res.status(403).redirect("/");
+        res.status(401).redirect("/");
     }
 }
 
@@ -20,6 +20,10 @@ exports.index = function(req, res) {
 * @params req{}
 * @return res{}
 */
+
+exports.ship = function(req, res){
+}
+
 exports.jabber = function(req, res){
     if(!users.isRoleNumeric(req.user, 0)){
         res.status(401).redirect("/");

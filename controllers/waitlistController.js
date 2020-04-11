@@ -22,7 +22,7 @@ exports.index = function(req, res){
         fleets.getFleetList(function (fleets) {           
             var fleetCount = 0;
             for (var i = 0; i < fleets.length; i++) {
-                if (fleets[i].status !== "Not Listed") fleetCount++;
+                if (fleets[i].status !== "Unlisted") fleetCount++;
             }
 
             waitlist.getQueue((!!req.user.waitlistMain)? req.user.waitlistMain.characterID : 0, function(queueInfo) {
