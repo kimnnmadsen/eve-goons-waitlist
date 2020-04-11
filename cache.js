@@ -35,9 +35,9 @@ module.exports = function (setup) {
 			});
 		}
 
-		db.updateOne(doc, data, { upsert: true }, function (err, result) {
+		db.updateMany(doc, data, { upsert: true }, function (err, result) {
 			if (err) {
-				log.error("addToDb: Error for db.updateOne", { err, id: data.id });
+				log.error("addToDb: Error for db.updateOne", { err, id: data });
 				// TODO: should this continue?
 			}
 			if (typeof cb === "function") cb();

@@ -24,27 +24,6 @@ const absorbInitialConnectError = function absorbInitialConnectError(cb, databas
 	});
 };
 
-	/*
-	const absorbInitialConnectError = function absorbInitialConnectError(cb, database) {);
-		mongo.connect(MONGODB_URL, function (err, client) {
-			if(err) {
-				log.error('Database connection failure', {err});
-				if(err.message && err.message.match(/failed to connect to server .* on first connect/)) {
-						setTimeout(absorbInitialConnectError.bind(null, cb, dbService), 2000);
-				}
-			} else {
-				if(database !== undefined) {
-					database.db = client.db(setup.data.mongoDbName);
-				} else {
-					dbService.db = client.db(setup.data.mongoDbName);
-				}
-				log.info("Database connection successful.");
-				cb();
-			}
-	
-		});
-	};
-	*/
 	const dbService = {connect: absorbInitialConnectError};
 	
 

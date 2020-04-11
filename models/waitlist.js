@@ -58,9 +58,10 @@ module.exports = function (setup) {
                     "signup": Date.now(),
                 }
 
-                db.insertOne(waitlist, function (err, cb) {
+                db.insertOne(waitlist, function (err) {
                     if (err) console.error("waitlist.add: Error for db.insertOne", { err, name: pilot.name });
-                    if (!err) cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
+                    cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
+                    //return;
                 });
             })
         })
@@ -80,6 +81,7 @@ module.exports = function (setup) {
                     return;
                 } 
                 cb({"class": "success", "title": "Success", "message":"We removed you from the waitlist!"});
+                return;
             });
         } else { //Remove alt only
             db.deleteOne({characterID: Number(characterID)}, function (err) {

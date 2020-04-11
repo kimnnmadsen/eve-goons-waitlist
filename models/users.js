@@ -171,16 +171,17 @@ module.exports = function (setup) {
 	*/
 	module.getMain = function(userID, mainPilot){
 		db.findOne({"characterID": userID}).then(function(userObject){
+			
 			//No user detected
 			if(!userObject)
 			{
 				mainPilot(null);
 				return;
 			}
-
+			
 			//User is main
 			if(userObject.account.main){
-				mainPilot(userObject);
+				mainPilot = userObject;
 				return;
 			}
 
