@@ -10,7 +10,6 @@ module.exports = function (setup) {
     module.get = function (cb) {
 		db.find({}).sort({ "signupTime": 1 }).toArray(function (err, docs) {
 			if (err) log.error("get: Error for db.find", { err });
-            
             for(let i = 0; i < docs.length; i++){
                 var signuptime = Math.floor((Date.now() - docs[i].signup)/1000/60);
                 var signupHours = 0;

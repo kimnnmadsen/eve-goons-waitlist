@@ -5,7 +5,6 @@ const users = require('../models/users.js')(setup);
 //Render Pilot Settings Page
 exports.index = function(req, res) {
     if (req.isAuthenticated()) {
-        
             var userProfile = req.user;
             var sideBarSelected = 2;
             res.render('pilotSettings.njk', {userProfile, sideBarSelected});

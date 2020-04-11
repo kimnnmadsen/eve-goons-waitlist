@@ -32,7 +32,7 @@
 						<div class="col-lg-4 col-md-6 col-sm-12">
 							{% if fleetCount > 0 %}
 								<!-- Waitlist Queue Panel -->
-								{% if position.position != "##" %}
+								{% if position.position %}
 								<div class="statistic-block block noselect">
 									<div class="title">                    
 										<strong>Queue Info</strong>
@@ -77,7 +77,7 @@
 												</div>
 												<label for="character">Select Your Main:</label>
 												<select id="character" class="form-control" name="pilot">
-													<option value="" required>Choose</option>
+													<option value="" required>{{ userProfile.waitlistMain.name }}</option>
 													{% for pilot in userProfile.account.pilots %}
 													<option value="{{ pilot.characterID }}">{{ pilot.name }}</option>
 													{% endfor %}
