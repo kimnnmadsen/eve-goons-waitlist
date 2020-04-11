@@ -12,7 +12,7 @@ module.exports = function (setup) {
 			return;
 		}
 		users.findAndReturnUser(req.session.passport.user.characterID, function (userData) {
-			if (!userData) {
+			if (!userData || userData.characterID == null) {
 				req.logout();
 				res.render("statics/login.html");
 				next();
