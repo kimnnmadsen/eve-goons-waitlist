@@ -1,15 +1,21 @@
 exports.oauth = {
-        clientID: "40a82d63f8b14174b43dd076d347453a",
-        secretKey: "IpaMeqTpKsPuBntqx5xogOyh7dWk9oAl9kQ9KU7v",
-        callbackURL: "https://tdf.n3it.xyz:5000/auth/provider/callback",
-        scopes: ['publicData','esi-location.read_location.v1','esi-location.read_ship_type.v1','esi-skills.read_skills.v1','esi-skills.read_skillqueue.v1','esi-fleets.read_fleet.v1','esi-fleets.write_fleet.v1','esi-ui.open_window.v1','esi-ui.write_waypoint.v1','esi-location.read_online.v1','esi-clones.read_implants.v1'],
-        userAgent: 'express 4.9.5, eve-sso, tdf-incursionauth 1.0',
+        clientID: "a0105db55dcc4ea1b012c29c8698bed1",
+        secretKey: "sVRnjwhnAplB2HkZ4zkdM3l1911xNWBE6i9C09k2",
+        callbackURL: "https://tdf-dev.n3it.xyz/auth/provider/callback",
+        scopes: 
+                ['publicData','esi-wallet.read_character_wallet.v1',
+                'esi-ui.open_window.v1','esi-ui.write_waypoint.v1',
+                'esi-location.read_location.v1','esi-location.read_online.v1','esi-location.read_ship_type.v1',
+                'esi-skills.read_skillqueue.v1','esi-skills.read_skills.v1',
+                'esi-fleets.read_fleet.v1','esi-fleets.write_fleet.v1',
+                'esi-clones.read_clones.v1','esi-clones.read_implants.v1'],
+        userAgent: 'express 4.9.5, eve-sso, tdf-waitlist 1.0',
         baseSSOUrl: "login.eveonline.com"
 };
 
 exports.data = {
         directory: "data", //Where data will be stored
-        sessionSecret: "DEKvRmdcQz63mJq6rkR9gVDGJWN8SK48ZpYK",
+        sessionSecret: "DEKvRmdcQz63mJq6rkR9gVDGJWN8SK48Z123pYK",
 //	mongoDbURL: "mongodb://localhost:27017",
 	mongoDbURL: "mongodb+srv://waitlist:oQcqLQEDidz2QnYT@eve-tdf-waitlist-f8bbz.mongodb.net/test?retryWrites=true&w=majority",
         mongoDbName: "eve-tdf-waitlist",
@@ -42,7 +48,10 @@ exports.fleet = {
 }
 
 exports.settings = {
-        port: 5000
+        port: 443,
+        https: true,
+        cert: 'cert/tdf-dev.cert.txt',
+        key: 'cert/tdf-dev.key.txt'
 }
 
 //roleNumeric titles, use null to disable. Leave index0 as member

@@ -10,7 +10,6 @@ module.exports = function (setup) {
     module.get = function (cb) {
 		db.find({}).sort({ "signupTime": 1 }).toArray(function (err, docs) {
 			if (err) log.error("get: Error for db.find", { err });
-            
             for(let i = 0; i < docs.length; i++){
                 var signuptime = Math.floor((Date.now() - docs[i].signup)/1000/60);
                 var signupHours = 0;
@@ -61,7 +60,7 @@ module.exports = function (setup) {
 
                 db.insertOne(waitlist, function (err, cb) {
                     if (err) console.error("waitlist.add: Error for db.insertOne", { err, name: pilot.name });
-                    if (!err) return cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
+                    if (!err) cb({"class": "success", "title": "Success", "message": pilot.name + " was added to the waitlist."});
                 });
             })
         })

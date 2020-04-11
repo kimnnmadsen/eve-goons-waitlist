@@ -1,21 +1,19 @@
 
 // mandatory setup.js
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const nunjucks = require('nunjucks');
 if (!fs.existsSync(path.normalize(__dirname + "/setup.js"))) {
 	throw "You need to create a setup.js file. Refer to the readme."
 }
-const ssl = {
-	key: fs.readFileSync('cert/tdf.key.txt', 'utf8'),
-	cert: fs.readFileSync('cert/tdf.cert.txt', 'utf8')
-};
-
 const setup = require('./setup.js');
 const log = require('./logger.js')(module);
 const database = require('./dbHandler.js');
-
+const https = require('https');
+const certificate = {
+	cert: fs.readFileSync(setup.settings.cert, 'utf8'),
+	key: fs.readFileSync(setup.settings.key, 'utf8')
+};
 
 //Apparently JS has a shit fit when it can't throw errors properly so uh, we need to make it throw errors properly
 process.on('uncaughtException', function(exception) {
@@ -142,13 +140,17 @@ database.connect(function () {
 
 	//Configure Express webserver
 	//HTTPS
-	var httpsServer = https.createServer(ssl, app);
-	httpsServer.listen(setup.settings.port, function listening() {
-		log.info('Express online and accepting connections');
-	});
+	if (setup.settings.https){
+		const httpsServer = https.createServer(certificate, app);
+		httpsServer.listen(setup.settings.port, function listening() {
+		log.info('Express online and accepting https connections on port '+ setup.settings.port);
+		});
+	} else {
 	//HTTP
-//	app.listen(setup.settings.port, function listening() {
-//		log.info('Express online and accepting connections');
-//	});
+		app.listen(setup.settings.port, function listening() {
+		log.info('Express online and accepting http connections on port '+setup.settings.port);
+		});
+	}
+
 
 });

@@ -1,7 +1,6 @@
 const setup = require('../setup.js');
 const refresh = require('passport-oauth2-refresh');
 const esi = require('eve-swagger');
-const esiApi = require('../esi/api.ts');
 const cache = require('../cache.js')(setup);
 const db = require('../dbHandler.js').db.collection('users');
 const log = require('../logger.js')(module);
@@ -35,7 +34,29 @@ module.exports = function() {
 		}) 
 	}
 
-	
+    module.getShipType = function (user, cb) {
+		module.getRefreshToken(user.characterID, function(accessToken){
+			if(!!!accessToken){
+				log.warn("user.getShipType: Could not get an accessToken", {pilot: user.name})
+				cb({id: 0, name: "unknown", lastcheck: Date.now()});
+				return;
+			}
+			esi.characters(user.characterID, accessToken).location().ship(function (shipResult) {
+				cache.get(shipResult.ship_id, null, function(systemObject){
+					var ship = {
+						shipID: systemObject.id,
+						name: systemObject.name,
+					}
+					cb(location);
+				})
+			}).catch(function(err) {
+				log.error("user.getLocation: Error GET /characters/{character_id}/location/", {pilot: user.name, err});
+				cb({id: 0, name: "unknown", lastcheck: Date.now()});
+			})
+		}) 
+	}
+
+
 
 	/*
 	* Checks to see if the user is online

@@ -1,6 +1,7 @@
 #setup.js
 data/
 sessions/
+cert/
 # Logs
 logs/
 .idea/
