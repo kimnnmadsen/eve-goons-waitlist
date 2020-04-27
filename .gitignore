@@ -2,6 +2,7 @@
 data/
 sessions/
 cert/
+.tmp.drivedownload
 # Logs
 logs/
 .idea/

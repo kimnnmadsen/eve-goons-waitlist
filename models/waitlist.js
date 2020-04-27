@@ -28,7 +28,7 @@ module.exports = function (setup) {
     * @params
     * @return
     */
-    module.add = function(waitlistMain, pilot, ship, cb){
+    module.add = function(waitlistMain, pilot, cb){
         module.isUserPresent(pilot.characterID, function(result){
             if(result){
                 cb({"class": "error", "title": "Woops", "message": pilot.name + " is already on the waitlist."})
@@ -49,7 +49,7 @@ module.exports = function (setup) {
                     "waitlistMain": waitlistMain,
                     "name": pilot.name,
                     "characterID": pilot.characterID,
-                    "ship": ship,
+                    "fits": pilot.fits,
                     "location": {
                         "systemID": null,
                         "name": null
@@ -79,7 +79,7 @@ module.exports = function (setup) {
                     if (err) log.error("waitlist.remove: Error for db.deleteOne", { err, 'character ID': characterID });
                     cb({"class": "error", "title": "Woops!", "message":"We could not remove you from the waitlist!"});
                     return;
-                } 
+                }
                 cb({"class": "success", "title": "Success", "message":"We removed you from the waitlist!"});
                 return;
             });

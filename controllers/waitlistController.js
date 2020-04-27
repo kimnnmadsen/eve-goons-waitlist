@@ -67,7 +67,7 @@ exports.signup = function(req, res){
             }
         }
 
-            waitlist.add(waitlistMain, pilot, req.body.ship, function(result){
+            waitlist.add(waitlistMain, pilot, function(result){
             wlog.joinWl(pilot);
             req.flash("content", {"class": result.class, "title": result.title, "message": result.message});
             res.redirect(`/`);

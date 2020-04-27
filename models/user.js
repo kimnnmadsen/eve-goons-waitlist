@@ -227,8 +227,11 @@ module.exports = function() {
 		})
 	}
 
-	module.addFit = function(characterID, fit, cb){
+	module.addFit = function(characterID, fitId, shipName, fitName, fit, cb){
 		let newFit = {
+			"fitId": fitId,
+			"shipName": shipName,
+			"fitName": fitName,
 			"fit": fit
 		}
 		db.updateOne({characterID: characterID}, {$push: {fits: newFit}}, function(err){
